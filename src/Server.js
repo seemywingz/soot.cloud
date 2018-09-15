@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const fs = require('fs');
+const dir = require('node-dir');
 app.use(express.static(path.join(__dirname, '../build')));
 
 require('dotenv').load();
 
 let port = process.env.REACT_APP_API_PORT
+let movieDir = process.env.REACT_APP_MOVIE_DIR
+
 console.log("Starting App on Port: " + port)
 app.listen(port);
 
@@ -14,17 +17,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-function walkDir(dir) {
-  let json = {}
-  return fs.readdirSync(dir, (err, files) => {
-    json.error = "err"
-    json.fileList = files.map(item => item);
-  })
-}
-
 app.get('/movies/list', (req, res) => {
   console.log("Getting Current List of Movies")
-  let movieList = walkDir(process.env.REACT_APP_MOVIE_DIR)
+  var movieList = dir.files(movieDir, {sync:true});
   console.log("MOVIES",movieList)
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ 
@@ -35,8 +30,9 @@ app.get('/movies/list', (req, res) => {
   }));
 })
 
-app.get('/movies/:fileName', (req, res) => {
-  const path = process.env.REACT_APP_MOVIE_DIR + req.params.fileName
+app.get('/movies', (req, res) => {
+  console.log("Starting Movie Stram for",req.query.filePath )
+  const path = req.query.filePath
   const stat = fs.statSync(path)
   const fileSize = stat.size
   const range = req.headers.range

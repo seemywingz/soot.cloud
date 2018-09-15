@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-let movieFile = "Bambi.mp4"
+let movieFile = "movies/Bambi.mp4"
 let movieURL =  process.env.REACT_APP_API_URL + ":" + process.env.REACT_APP_API_PORT + "/movies/"
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
         </header>
         <p className="App-intro">
           <video id="videoPlayer" width="1080" controls>
-            <source src={movieURL + movieFile} type="video/mp4"></source>
+            <source src={movieURL + "?filePath="+movieFile} type="video/mp4"></source>
           </video>
         </p>
       </div>
