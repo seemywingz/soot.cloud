@@ -2,14 +2,20 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const fs = require('fs');
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 require('dotenv').load();
 
-app.listen(process.env.API_PORT);
+app.listen(process.env.REACT_APP_API_PORT);
+console.log("Starting App on Port: " + process.env.REACT_APP_API_PORT)
 
-app.get('/video/:fileName', function(req, res) {
-  const path = process.env.MOVIE_PATH + req.params.fileName
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
+app.get('/videos/:fileName', function(req, res) {
+  const path = process.env.REACT_APP_MOVIE_PATH + req.params.fileName
   const stat = fs.statSync(path)
   const fileSize = stat.size
   const range = req.headers.range

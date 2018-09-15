@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+let videoFile = "Bambi.mp4"
+let videoURL =  process.env.REACT_APP_API_URL + ":" + process.env.REACT_APP_API_PORT + "/videos/"
+
 class App extends Component {
   render() {
     return (
@@ -12,7 +15,7 @@ class App extends Component {
         </header>
         <p className="App-intro">
           <video id="videoPlayer" width="1080" controls>
-            <source src="http://localhost:10000/video/Bambi.mp4" type="video/mp4"></source>
+            <source src={videoURL + videoFile} type="video/mp4"></source>
           </video>
         </p>
       </div>

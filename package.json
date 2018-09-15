@@ -12,6 +12,7 @@
     "react-scripts": "1.1.5"
   },
   "scripts": {
+    "srv": "node ./src/Server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
