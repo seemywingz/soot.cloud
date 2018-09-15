@@ -6,16 +6,37 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 require('dotenv').load();
 
-app.listen(process.env.REACT_APP_API_PORT);
-console.log("Starting App on Port: " + process.env.REACT_APP_API_PORT)
-
+let port = process.env.REACT_APP_API_PORT
+console.log("Starting App on Port: " + port)
+app.listen(port);
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-app.get('/videos/:fileName', function(req, res) {
-  const path = process.env.REACT_APP_MOVIE_PATH + req.params.fileName
+function walkDir(dir) {
+  let json = {}
+  return fs.readdirSync(dir, (err, files) => {
+    json.error = "err"
+    json.fileList = files.map(item => item);
+  })
+}
+
+app.get('/movies/list', (req, res) => {
+  console.log("Getting Current List of Movies")
+  let movieList = walkDir(process.env.REACT_APP_MOVIE_DIR)
+  console.log("MOVIES",movieList)
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ 
+    payload: {
+      movieList: movieList
+    },
+    error: movieList.err
+  }));
+})
+
+app.get('/movies/:fileName', (req, res) => {
+  const path = process.env.REACT_APP_MOVIE_DIR + req.params.fileName
   const stat = fs.statSync(path)
   const fileSize = stat.size
   const range = req.headers.range
