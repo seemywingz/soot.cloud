@@ -45,8 +45,8 @@ class BurgerMenu extends React.Component {
           if (this.state.selectedGenre === genre) {// show movies for selected genre in menue
             let movies = this.state.movies.map((moviePath, i) => {
               let movieSplit = moviePath.split("/")
-              let movieFile = movieSplit[movieSplit.length-1]
-              let movieName = movieFile.split(".")
+              let movieName = movieSplit[movieSplit.length-1]
+              // let movieName = movieFile.split(".")
               return <p key={i}>
                 <a id={movieFile} key={i} className="menu-item" onClick={()=>this.props.playMovie(moviePath)} style={{cursor: 'pointer'}}>{movieName[0]}</a>
               </p>
