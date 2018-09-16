@@ -7,7 +7,7 @@ class BurgerMenu extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      genres: ["Kids", "Drama", "Action", "Horror"],
+      genres: ["Action", "Comedy", "Drama", "Horror", "Kids", "Marvel", "Teen", "TV Series"],
       movies: [],
       selectedGenre: ""
     }
