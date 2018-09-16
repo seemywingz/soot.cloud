@@ -30,7 +30,21 @@ app.get('/movies/list', (req, res) => {
   }));
 })
 
-app.get('/movies', (req, res) => {
+app.get('/genre/:genre', (req, res) => {
+  let genre = req.params.genre
+  console.log("Getting Current List of Movies in genre")
+  var movieList = dir.files(`${movieDir}/${genre}`, {sync:true});
+  console.log(`MOVIES IN ${genre}`,movieList)
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ 
+    payload: {
+      movieList: movieList
+    },
+    error: movieList.err
+  }));
+})
+
+app.get('/watch', (req, res) => {
   // console.log("Starting Movie Stram for",req.query.filePath )
   const path = req.query.filePath
   const stat = fs.statSync(path)

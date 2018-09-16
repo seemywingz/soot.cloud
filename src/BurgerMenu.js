@@ -14,7 +14,6 @@ class BurgerMenu extends React.Component {
       <Menu>
         <h3>Genres</h3>
         {this.state.genres.map((genre, i )=> {
-          console.log(genre)
           return <a id={genre} key={i} className="menu-item">{genre}</a>
         })}
       </Menu>
