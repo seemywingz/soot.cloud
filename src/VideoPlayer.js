@@ -6,7 +6,7 @@ let movieURL =  `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PO
 class VideoPlayer extends Component {
   render() {
     return (
-      <video id="videoPlayer" width="1080" controls>
+      <video className="video-player" id="videoPlayer" width="1080" controls>
         <source src={`${movieURL}/?filePath=${this.props.movieFile}`} type="video/mp4"></source>
       </video>
     );
