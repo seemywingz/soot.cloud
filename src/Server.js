@@ -31,7 +31,7 @@ app.get('/movies/list', (req, res) => {
 })
 
 app.get('/movies', (req, res) => {
-  console.log("Starting Movie Stram for",req.query.filePath )
+  // console.log("Starting Movie Stram for",req.query.filePath )
   const path = req.query.filePath
   const stat = fs.statSync(path)
   const fileSize = stat.size
