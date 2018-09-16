@@ -48,7 +48,7 @@ class BurgerMenu extends React.Component {
               let movieName = movieSplit[movieSplit.length-1]
               // let movieName = movieFile.split(".")
               return <p key={i}>
-                <a id={movieFile} key={i} className="menu-item" onClick={()=>this.props.playMovie(moviePath)} style={{cursor: 'pointer'}}>{movieName[0]}</a>
+                <a id={movieName} key={i} className="menu-item" onClick={()=>this.props.playMovie(moviePath)} style={{cursor: 'pointer'}}>{movieName[0]}</a>
               </p>
             })
 
