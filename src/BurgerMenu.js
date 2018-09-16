@@ -35,21 +35,29 @@ class BurgerMenu extends React.Component {
       <Menu>
         <h3>Genres</h3>
         {this.state.genres.map((genre, i )=> {
-          let item = <p key={i}> 
-            <a id={genre} key={i} className="menu-item" onClick={()=>this.getMovies(genre)} style={{cursor: 'pointer'}}>{genre}</a>
-          </p>
-          if (this.state.selectedGenre === genre) {// show movies for genre in menue
+          let item
+          if (this.state.selectedGenre === "") {
+            item = <p key={i}> 
+              <a id={genre} key={i} className="menu-item" onClick={()=>this.getMovies(genre)} style={{cursor: 'pointer'}}>{genre}</a>
+            </p>
+          }
+
+          if (this.state.selectedGenre === genre) {// show movies for selected genre in menue
             let movies = this.state.movies.map((movie, i) => {
+              let movieSplit = movie.split("/")
+              let movieName = movieSplit[movieSplit.length-1]
               return <p key={i}>
-                <a id={movie} key={i} className="menu-item" onClick={()=>this.props.playMovie(movie)} style={{cursor: 'pointer'}}>{movie}</a>
+                <a id={movie} key={i} className="menu-item" onClick={()=>this.props.playMovie(movie)} style={{cursor: 'pointer'}}>{movieName}</a>
               </p>
             })
+
             item = <div key={i}> 
               <a id={genre} key={i} className="menu-item" onClick={()=>this.getMovies(genre)} style={{cursor: 'pointer'}}>{genre}</a>
               <br></br>
               {movies}
             </div>
           }
+
           return item
         })}
       </Menu>
