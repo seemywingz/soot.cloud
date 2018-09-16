@@ -43,16 +43,17 @@ class BurgerMenu extends React.Component {
           }
 
           if (this.state.selectedGenre === genre) {// show movies for selected genre in menue
-            let movies = this.state.movies.map((movie, i) => {
-              let movieSplit = movie.split("/")
-              let movieName = movieSplit[movieSplit.length-1]
+            let movies = this.state.movies.map((moviePath, i) => {
+              let movieSplit = moviePath.split("/")
+              let movieFile = movieSplit[movieSplit.length-1]
+              let movieName = movieFile.split(".")
               return <p key={i}>
-                <a id={movie} key={i} className="menu-item" onClick={()=>this.props.playMovie(movie)} style={{cursor: 'pointer'}}>{movieName}</a>
+                <a id={movieFile} key={i} className="menu-item" onClick={()=>this.props.playMovie(moviePath)} style={{cursor: 'pointer'}}>{movieName[0]}</a>
               </p>
             })
 
             item = <div key={i}> 
-              <a id={genre} key={i} className="menu-item" onClick={()=>this.getMovies(genre)} style={{cursor: 'pointer'}}>{genre}</a>
+              <a id={genre} key={i} className="menu-item" onClick={()=>this.getMovies(genre)} style={{color: 'purple', cursor: 'pointer'}}>{genre}</a>
               <br></br>
               {movies}
             </div>
