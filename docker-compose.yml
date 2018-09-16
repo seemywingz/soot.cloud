@@ -11,4 +11,4 @@ services:
       - /home/livingroom/capacious/Movies:/app/movies
       - .env:/app/.env
     ports:
-      - "10000:10000"
+      - "80:10000"

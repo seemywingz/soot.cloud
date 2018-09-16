@@ -7,7 +7,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 require('dotenv').load();
 
-let port = process.env.REACT_APP_API_PORT
+let port = process.env.REACT_APP_API_INTERNAL_PORT
 let movieDir = process.env.REACT_APP_MOVIE_DIR
 
 console.log("Starting App on Port: " + port)
