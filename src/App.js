@@ -23,10 +23,10 @@ class App extends React.Component {
 
   render() {
     let page = <h1>Soot Cloud</h1>
-    if (this.state.playMovie !== "") {
+    // if (this.state.playMovie !== "") {
       console.log(`Loading Vidio ${this.state.playMovie}`)
       page = <VideoPlayer movieFile = {this.state.playMovie}></VideoPlayer>
-    }
+    // }
     return <div className="App">
       <BurgerMenu playMovie = {this.playMovie}></BurgerMenu>
       {page}

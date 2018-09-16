@@ -4,9 +4,18 @@ import React, { Component } from 'react';
 let movieURL =  `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/watch`
 
 class VideoPlayer extends Component {
+  // constructor(props){
+  //   super(props)
+  // }
+
+  // componentWillReceiveProps(props){
+  //   console.log("RECIEVED PROSP")
+  //   this.forceUpdate();
+  // }
+
   render() {
     return (
-      <video className="video-player" id="videoPlayer" width="1080" controls>
+      <video key={this.props.movieFile} className="video-player" id="videoPlayer" width="1080" controls>
         <source src={`${movieURL}/?filePath=${this.props.movieFile}`} type="video/mp4"></source>
       </video>
     );
