@@ -7,7 +7,7 @@ class VideoPlayer extends Component {
 
   render() {
     return (
-      <video key={this.props.movieFile} className="video-player" id="videoPlayer" width="1080" controls>
+      <video key={this.props.movieFile} className="video-player" id="videoPlayer" width="1080" controls autoplay>
         <source src={`${movieURL}/?filePath=${this.props.movieFile}`} type="video/mp4"></source>
       </video>
     );
