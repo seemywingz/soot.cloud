@@ -30,23 +30,18 @@ class BurgerMenu extends React.Component {
     })
   }
 
-  playMovie(){
-
-  }
-
   render () {
     return (
       <Menu>
         <h3>Genres</h3>
-        {/* {console.log(this.state)} */}
         {this.state.genres.map((genre, i )=> {
           let item = <p key={i}> 
             <a id={genre} key={i} className="menu-item" onClick={()=>this.getMovies(genre)} style={{cursor: 'pointer'}}>{genre}</a>
           </p>
-          if (this.state.selectedGenre === genre) {// show movies in genre
+          if (this.state.selectedGenre === genre) {// show movies for genre in menue
             let movies = this.state.movies.map((movie, i) => {
               return <p key={i}>
-                <a id={movie} key={i} className="menu-item" onClick={()=>this.playMovie(movie)} style={{cursor: 'pointer'}}>{movie}</a>
+                <a id={movie} key={i} className="menu-item" onClick={()=>this.props.playMovie(movie)} style={{cursor: 'pointer'}}>{movie}</a>
               </p>
             })
             item = <div key={i}> 

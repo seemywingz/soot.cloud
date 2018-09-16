@@ -1,24 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BurgerMenu from './BurgerMenu.js';
-// import VideoPlayer from './VideoPlayer.js';
+import VideoPlayer from './VideoPlayer.js';
 import './App.css';
-import { height } from 'window-size';
 
-class App extends Component {
-  constructor(){
-    super();
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.playMovie = this.playMovie.bind(this)
     this.state = {
       playMovie: ""
     }
   }
+
+  playMovie(movie){
+    console.log(`Playing Movie ${movie}`)
+    this.setState((state) =>{
+      return {
+        playMovie: movie
+      }
+    })
+  }
+
   render() {
-    return (
-      
-      <div className="App">
-        <BurgerMenu></BurgerMenu>
-          <h1>Soot Cloud</h1>
-      </div>
-    );
+    let page = <h1>Soot Cloud</h1>
+    if (this.state.playMovie !== "") {
+      console.log(`Loading Vidio ${this.state.playMovie}`)
+      page = <VideoPlayer movieFile = {this.state.playMovie}></VideoPlayer>
+    }
+    return <div className="App">
+      <BurgerMenu playMovie = {this.playMovie}></BurgerMenu>
+      {page}
+    </div>
   }
 }
 
