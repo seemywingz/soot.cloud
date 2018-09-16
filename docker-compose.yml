@@ -1,0 +1,11 @@
+version: '2.2'  # Use v2, because v3 is specific to swarm. :-/
+# Hey Docker, stop trying to make us use swarm.   It's not a thing.   Stop trying to make it a thing.
+
+services:
+  soot.cloud:
+    container_name: soot.cloud
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "10000:10000"
