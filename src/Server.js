@@ -32,10 +32,11 @@ app.get('/movies/list', (req, res) => {
 
 app.get('/genre/:genre', (req, res) => {
   let genre = req.params.genre
-  console.log("Getting Current List of Movies in genre")
+  // console.log("Getting Current List of Movies in genre")
   var movieList = dir.files(`${movieDir}/${genre}`, {sync:true});
-  console.log(`MOVIES IN ${genre}`,movieList)
+  // console.log(`MOVIES IN ${genre}`,movieList)
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.send(JSON.stringify({ 
     payload: {
       movieList: movieList
