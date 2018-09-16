@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BurgerMenu from './BurgerMenu.js';
-import logo from './logo.png';
 import './App.css';
 
 let movieFile = "movies/Bambi.mp4"

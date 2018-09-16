@@ -2,18 +2,21 @@ import React from 'react';
 import { stack as Menu } from 'react-burger-menu'
 
 class BurgerMenu extends React.Component {
-  showSettings (event) {
-    event.preventDefault();
+  constructor(props){
+    super(props)
+    this.state = {
+      genres: ["Kids", "Drama", "Action", "Horror"]
+    }
   }
 
   render () {
     return (
       <Menu>
-        <h3>Genre</h3>
-        <a id="kids" className="menu-item">Kids</a>
-        <a id="action" className="menu-item">Action</a>
-        <a id="drama" className="menu-item">Drama</a>
-        {/* <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a> */}
+        <h3>Genres</h3>
+        {this.state.genres.map((genre, i )=> {
+          console.log(genre)
+          return <a id={genre} key={i} className="menu-item">{genre}</a>
+        })}
       </Menu>
     );
   }
