@@ -46,9 +46,8 @@ class BurgerMenu extends React.Component {
             let movies = this.state.movies.map((moviePath, i) => {
               let movieSplit = moviePath.split("/")
               let movieName = movieSplit[movieSplit.length-1]
-              // let movieName = movieFile.split(".")
               return <p key={i}>
-                <a id={movieName} key={i} className="menu-item" onClick={()=>this.props.playMovie(moviePath)} style={{cursor: 'pointer'}}>{movieName[0]}</a>
+                <a id={movieName} key={i} className="menu-item" onClick={()=>this.props.playMovie(moviePath)} style={{cursor: 'pointer'}}>{movieName}</a>
               </p>
             })
 
