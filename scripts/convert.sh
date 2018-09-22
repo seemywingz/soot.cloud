@@ -2,31 +2,54 @@
 
 # Defaults
 dir=.
+inFormat="avi"
+outFormat="mp4"
+removeOriginal=false
 
-while getopts 'd:' flag; do
+
+while getopts 'd:i:o:r' flag; do
   case "${flag}" in
     d)
       dir="${OPTARG}"
       ;;
+    i)
+      inFormat="${OPTARG}"
+      ;;
+    o)
+      outFormat="${OPTARG}"
+      ;;
+    r)
+      removeOriginal=true
+      ;; 
     *)
       error "Unexpected option ${flag}"
       ;;
   esac
 done
 
-movieFiles=()
+fileList=()
 while IFS=  read -r -d $'\0'; do
-    movieFiles+=("$REPLY")
-done < <(find ${dir} -name "*.avi" -print0)
+    fileList+=("$REPLY")
+done < <(find ${dir} -name "*.${inFormat}" -print0)
 
-## now loop through the above array
-for avi in "${movieFiles[@]}"
+for inFile in "${fileList[@]}"
 do
-   mp4=${avi/.avi/.mp4}
-    
-   echo "Converting ${avi} to ${mp4}"
-   ffmpeg -i ${avi} ${mp4}
-   # rm ${avi}
+   outFile=${inFile/.${inFormat}/.${outFormat}}
+   echo
+   echo "Converting:"
+   echo "  ${inFile}"
+   echo "   to"
+   echo "  ${outFile}"
+   echo
+   
+   #ffmpeg -i ${inFile} ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
+   
+   if [[ $removeOriginal = true ]];then 
+     echo "Removing:"
+     echo "  ${inFile}"
+     #rm ${inFile} 
+   fi
+   
    break
 done
 
