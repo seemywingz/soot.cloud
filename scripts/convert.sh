@@ -49,7 +49,7 @@ for inFile in "${fileList[@]}";do
     removeOriginal=false
     ffmpeg -i ${inFile} -c:v libx264 -crf 20  -c:a aac -strict -2 -ss 60 -t 60 ${outFile}
   else 
-    ffmpeg -i ${inFile} -c:v libx264 -crf 20 -c:a aac -strict -2 ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
+    ffmpeg -i ${inFile} -c:v libx264 -crf 23 -c:a aac -strict -2 ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
   fi
  
   if [[ $removeOriginal = true ]];then 
@@ -57,7 +57,5 @@ for inFile in "${fileList[@]}";do
     echo "  ${inFile}"
     rm ${inFile} 
   fi
-  
-  break
 done
 
