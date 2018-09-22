@@ -36,16 +36,16 @@ for inFile in "${fileList[@]}";do
   echo
   echo "Converting:"
   echo "  ${inFile}"
-  echo "   to"
+  echo "  -- to --"
   echo "  ${outFile}"
   echo
   
-  #ffmpeg -i ${inFile} ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
+  ffmpeg -i ${inFile} ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
   
   if [[ $removeOriginal = true ]];then 
     echo "Removing:"
     echo "  ${inFile}"
-    #rm ${inFile} 
+    rm ${inFile} 
   fi
   
   break
