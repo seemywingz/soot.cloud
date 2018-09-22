@@ -5,8 +5,9 @@ dir=.
 inFormat="avi"
 outFormat="mp4"
 removeOriginal=false
+testConversion=false
 
-while getopts 'd:i:o:r' flag; do
+while getopts 'd:i:o:rt' flag; do
   case "${flag}" in
     d)
       dir="${OPTARG}"
@@ -20,6 +21,9 @@ while getopts 'd:i:o:r' flag; do
     r)
       removeOriginal=true
       ;; 
+    t)
+      testConversion=true
+      ;;
     *)
       error "Unexpected option ${flag}"
       ;;
@@ -40,8 +44,14 @@ for inFile in "${fileList[@]}";do
   echo "  ${outFile}"
   echo
   
-  ffmpeg -i ${inFile} ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
-  
+  if [[ $testConversion = true ]];then
+    echo "!! Testing Conversion !!"
+    removeOriginal=false
+    ffmpeg -i ${inFile} -c:v libx264 -crf 20  -c:a aac -strict -2 -ss 60 -t 60 ${outFile}
+  else 
+    ffmpeg -i ${inFile} -c:v libx264 -crf 20 -c:a aac -strict -2 ${outFile} 2>&1 | tee -a ${dir}/conversion.log 
+  fi
+ 
   if [[ $removeOriginal = true ]];then 
     echo "Removing:"
     echo "  ${inFile}"
